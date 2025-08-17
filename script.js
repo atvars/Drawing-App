@@ -3,7 +3,7 @@ const increaseBtn = document.getElementById('increase')
 const decreaseBtn = document.getElementById('decrease')
 const sizeEL = document.getElementById('size')
 const colorEL = document.getElementById('color')
-const clear = document.getElementById('clear')
+const clearEL = document.getElementById('clear')
 const ctx = canvas.getContext('2d')
 
 let size = 10
@@ -65,5 +65,34 @@ function drawLine(x1, y1, x2, y2) {
     ctx.stroke()
 }
 
+function updateSizeOnScreen() {
+    sizeEL.innerText = size
+}
+
+//increase line thickness
+increaseBtn.addEventListener('click', () => {
+    size += 5
+
+    if(size > 50) {
+        size = 50
+    }
+
+    updateSizeOnScreen()
+})
+
+//decrease line thikness
+decreaseBtn.addEventListener('click', () => {
+    size -= 5
+
+    if(size < 5) {
+        size = 5
+    }
+
+    updateSizeOnScreen()
+})
+
 // color change
 colorEL.addEventListener('change', (e) => color = e.target.value)
+
+//clear canvas
+clearEL.addEventListener('click', () => ctx.clearRect(0,0, canvas.width, canvas.height))
